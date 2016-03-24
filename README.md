@@ -1,2 +1,2 @@
 # graphmleditor
-GraphML editor application
+GraphML editor application.
