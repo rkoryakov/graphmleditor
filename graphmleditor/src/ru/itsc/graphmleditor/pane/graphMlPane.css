@@ -1,0 +1,113 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 24, 2015, 10:50:17 AM
+    Author     : koryakov.rv
+*/
+
+.main_button {
+    -fx-padding: 1 3 1 3;
+}
+
+#modalDimmer {
+    -fx-background-color: rgb(0, 0, 0, 0.5);
+}
+#taskDimmer {
+    -fx-background-color: rgb(0, 0, 0, 0.4);
+}
+
+#statusLabel {
+    -fx-font: 12px Tahoma;
+    -fx-font-style: italic;
+}
+
+#SettingsDialog {
+    -fx-background-color: black, white, 
+        linear-gradient(rgb(250,250,250), rgb(230,230,230));
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 15, 14, 13;
+    -fx-padding: 15;
+    -fx-effect: dropshadow( three-pass-box , black , 20, 0 , 0 , 0 );
+}
+
+#SettingsDialog #title {
+    -fx-font-size: 1.4em;
+    -fx-font-weight: bold;
+    -fx-text-fill: steelblue;
+}
+
+#collapse-button {
+    -fx-font: bold 15px 'monospace';
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: linear-gradient(to bottom right, #999999, #FFFFFF);
+    -fx-background-radius: 5;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-padding: 2 5 2 5;
+}
+
+#collapse-button:hover {
+    -fx-border-color: #FFFFFF;
+    -fx-cursor: hand;
+}
+
+#collapse-button:pressed {
+    -fx-border-color: #00cccc;
+}
+
+#group-node-header {
+    -fx-background-color: radial-gradient(focus-angle 45deg, focus-distance 60%, center 40% 60%, radius 70%, reflect, #f4f4f4, #dedede, #cccccc);
+    -fx-background-radius: 5;
+    /*-fx-border-color: #2e8b57;
+    //-fx-border-width: 2px;
+    -fx-padding: 3;
+   // -fx-spacing: 8;*/
+}
+#group-node-content {
+    -fx-background-color: radial-gradient(focus-angle 1deg, focus-distance 60%, center 50% 0%, radius 80%, reflect, #e4e4e4, #cecece, #bcbcbc);
+    -fx-background-radius: 2;
+    /*-fx-border-color: #2e8b57;
+    //-fx-border-width: 2px;
+    //-fx-padding: 3;
+    // -fx-spacing: 8;*/
+}
+#group-node-header-label {
+    -fx-font: 15px Tahoma;
+}
+.tooltip {    
+    -fx-background-color: linear-gradient(#cccccc, #666666);
+    -fx-padding: 3 3 3 3;
+}
+
+#child-node-content {
+    -fx-background-color: radial-gradient(focus-angle 1deg, focus-distance 60%, center 50% 0%, radius 80%, reflect, #efefff, #eae7ff, #ccccff);
+    -fx-background-radius: 2;
+}
+
+.tree-table-view {
+    -fx-font: 11px Tahoma;
+}
+
+.tree-table-row-cell {
+    -fx-background-color: -fx-table-cell-border-color, -fx-control-inner-background;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    -fx-text-fill: -fx-text-inner-color;
+}
+.tree-table-row-cell:selected {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-focus-color;
+    -fx-background-insets: 0, 1, 2;
+}
+
+.tree-table-row-cell:odd {
+    -fx-background-color: -fx-table-cell-border-color, derive(-fx-control-inner-background,-5%);
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.tree-table-row-cell:selected:odd {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-focus-color;
+    -fx-background-insets: 0, 1, 2;
+}

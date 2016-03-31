@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.* ?>
+<?import ru.itsc.graphmleditor.pane.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="768" prefWidth="1024" fx:controller="ru.itsc.graphmleditor.GraphMLEditorController" >
+    
+    <children>
+
+        <BorderPane fx:id="modelBorderPane" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" >
+                <top>
+                    <HBox fx:id="modelHBox">
+                        <ToolBar fx:id="mainToolbar" HBox.hgrow="ALWAYS" >
+                            
+                            <!-- Update graph representation (get GraphML from backend) -->
+                            <Button text="Load" fx:id="loadBtn"  onAction="#handleActionLoad" contentDisplay="GRAPHIC_ONLY" styleClass="main_button">
+                                <tooltip>
+                                    <Tooltip text="Load from server"/>
+                                </tooltip>
+                                <graphic>
+                                    <ImageView fitHeight="35" fitWidth="35" >
+                                        <image>
+                                            <Image url="@images/web_database.png"/>
+                                        </image>                            
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+
+                            <!-- Getting from local -->
+                            <Button text="Open" fx:id="openBtn" onAction="#handleActionOpen" contentDisplay="GRAPHIC_ONLY" styleClass="main_button">
+                                <tooltip>
+                                    <Tooltip text="Load from local..."/>
+                                </tooltip>
+                                <graphic>
+                                    <ImageView fitHeight="35" fitWidth="35">
+                                        <image>
+                                            <Image url="@images/folder_grey.png" />
+                                        </image>                            
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            
+                            <!-- Download GraphML as file -->
+                            <Button text="Save" fx:id="saveBtn" onAction="#handleActionSave" contentDisplay="GRAPHIC_ONLY" styleClass="main_button">
+                                <tooltip>
+                                    <Tooltip text="Save to..."/>
+                                </tooltip>
+                                <graphic>
+                                    <ImageView fitHeight="35" fitWidth="35">
+                                        <image>
+                                            <Image url="@images/Clipper System_1 MO Disk.png"></Image>
+                                        </image>                            
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Button text="Settings" fx:id="settingsBtn" contentDisplay="GRAPHIC_ONLY" onAction="#handleActionSettings" styleClass="main_button">
+                                <tooltip>
+                                    <Tooltip text="Show settings"/>
+                                </tooltip>
+                                <graphic>
+                                    <ImageView fitHeight="35" fitWidth="35">
+                                        <image>
+                                            <Image url="@images/run.png"/>
+                                        </image>                            
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <!--<javafx.scene.shape.Line startX="0" startY="0" endX="0" endY="22" fx:id="modelToolbarSep"/>-->
+                            <!--<Button text="Autoscaling" fx:id="autoscalingButton"/>-->
+                        </ToolBar>
+                    </HBox>
+                </top>
+                <center>
+                    <StackPane BorderPane.alignment="CENTER">
+                        <SplitPane dividerPositions="0.76" focusTraversable="true" BorderPane.alignment="CENTER">
+                            <items>
+                                <AnchorPane>
+                                    <children>
+                                       <!-- <ScrollPane fx:id="scrollPane" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="-1.0"> -->
+                                            <GraphMLPane fx:id="graphMLPane" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="-1.0"/>
+                                       <!-- </ScrollPane> -->
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane>
+                                    <children>
+                                        <TreeTableView layoutX="2.0" layoutY="-1.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="-1.0" tableMenuButtonVisible="true">
+                                            <columns>
+                                                <TreeTableColumn prefWidth="75.0" text="Attr" />
+                                                <TreeTableColumn prefWidth="75.0" text="Value" />
+                                                <TreeTableColumn prefWidth="75.0" text="Is visible" />
+                                            </columns>
+                                        </TreeTableView>
+                                    </children>
+                                </AnchorPane>
+                            </items>
+
+                        </SplitPane>
+                    
+                        <!-- create task dimmer, to dim screen when showing progress indicator  -->
+                        <StackPane fx:id="taskDimmer" visible="false">
+                            <ProgressIndicator fx:id="progress" maxHeight="110"  maxWidth="110" visible="false"/>
+                        </StackPane>
+                    </StackPane>
+                </center>
+                <bottom>
+                    <HBox>
+                        <ToolBar fx:id="infoTool" HBox.hgrow="ALWAYS">
+                           <Label fx:id="statusLabel"/>  
+                        </ToolBar>
+                    </HBox>    
+                </bottom>
+        </BorderPane>
+         <!-- create modal dimmer, to dim screen when showing modal dialogs  -->
+        <StackPane fx:id="modalDimmer" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" visible="false" />
+    </children>
+</AnchorPane>
