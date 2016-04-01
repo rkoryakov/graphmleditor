@@ -413,6 +413,12 @@ public class GraphMLGenerator {
         return edgeElement;
     }
     
+    /**
+     * Create <y:PolyLineEdge> element to set up line settings
+     * @param edge
+     * @param docInstance
+     * @return
+     */
     private static Element createEdgeGraphicsElement(Edge edge, Document docInstance) {
         Element polyLineEdge = GraphmlUtil.createPolyLineEdgeElement(docInstance);
         Element pathElement = GraphmlUtil.createPathElement(edge.getIdentSx(), edge.getScaleY(), edge.getIdentTx(), edge.getIdentTy(), docInstance);
@@ -421,9 +427,21 @@ public class GraphMLGenerator {
             Element pathElem = GraphmlUtil.createPointElement(edgePoint.toPoint2D(), docInstance);
             pathElement.appendChild(pathElem);
         }
-       // El
-        //polyLineEdge.appendChild(pathElement);
+       // TODO: 
+        /*
+         * <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-4.5">
+            <y:Point x="578.0739026853147" y="309.57426422713223"/>
+            <y:Point x="578.0739026853147" y="291.4727017271316"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
         
-        return polyLineEdge;
+         */
+       polyLineEdge.appendChild(pathElement);
+        
+       return polyLineEdge;
     }
 }
