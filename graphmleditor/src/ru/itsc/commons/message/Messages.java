@@ -46,7 +46,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 class Messages {
-    private static final String BUNDLE_NAME = "ru.itsk.commons.message.messages"; //$NON-NLS-1$
+    private static final String BUNDLE_NAME = "ru.itsc.commons.message.messages"; //$NON-NLS-1$
 
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 

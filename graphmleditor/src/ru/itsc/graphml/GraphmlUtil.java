@@ -276,6 +276,13 @@ public class GraphmlUtil {
         return bendStyle;
     }
     
+    public static Element createBendStyleElement(Boolean smoothed, Document docInstance) {
+        Element bendStyle = docInstance.createElement("y:BendStyle");
+        bendStyle.setAttribute("smoothed", smoothed.toString());
+        
+        return bendStyle;
+    }
+    
     public static Element createNodeKeyElement(String id, String attributeName, Document docInstance) {
         Element bsElement = createKeyElementForNode(id, docInstance);
         bsElement.setAttribute("attr.name", attributeName);

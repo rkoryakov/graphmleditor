@@ -55,7 +55,7 @@ public class GraphMLGenerator {
     private static final String BUSINESS_SYSTEM_NAME_ID = "id0";
     private static final String BUSINESS_SYSTEM_FULLNAME_ID = "id1";
     private static final String INTEGRATION_SCENARIO_ID = "id2";
-    private static final String GRAPHICS_ELEM_ID = "id3";
+    private static final String NODE_GRAPHICS_ELEM_ID = "id3";
     private static final String BUSINESS_SOLUTIONS_ID = "id4";
     private static final String INTERNAL_ID = "id5"; // node internal id 
     private static final String PLATFORM_NAME_ID = "id6";
@@ -71,6 +71,7 @@ public class GraphMLGenerator {
     private static final String EDGE_CHANGEDBY = "id16";
     private static final String EDGE_RECIEVER = "id17";
     private static final String EDGE_SENDER = "id18";
+    private static final String EDGE_GRAPHICS_ELEM_ID = "id19";
     
     public static String getGraphMl(Group group) throws ParserConfigurationException, TransformerException {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -160,7 +161,7 @@ public class GraphMLGenerator {
         folderNode.setAttribute("yfiles.foldertype", "group");
         Element bsName = GraphmlUtil.createDataValueElement(BUSINESS_SYSTEM_NAME_ID, node.labelProperty.getValue(), document);
         folderNode.appendChild(bsName);
-        Element dataNodegraphics = GraphmlUtil.createDataElement(GRAPHICS_ELEM_ID, document);
+        Element dataNodegraphics = GraphmlUtil.createDataElement(NODE_GRAPHICS_ELEM_ID, document);
         Element proxyAuto = GraphmlUtil.createProxyAutoBoundsNodeElement(document);
         dataNodegraphics.appendChild(proxyAuto);
         String activeState = node.collapseState.get() ? "0" : "1";
@@ -268,7 +269,7 @@ public class GraphMLGenerator {
         systemModules.setTextContent(graphNode.getDataValue(MODULE_NAMES_ID));
         
         nodeElem.appendChild(systemModules);
-        Element graphicsElement = GraphmlUtil.createDataElement(GRAPHICS_ELEM_ID, document);
+        Element graphicsElement = GraphmlUtil.createDataElement(NODE_GRAPHICS_ELEM_ID, document);
         Element shapeNode = creteShapeNodeElement(node, document);
         graphicsElement.appendChild(shapeNode);
         nodeElem.appendChild(graphicsElement);
@@ -292,9 +293,12 @@ public class GraphMLGenerator {
     	result.add(GraphmlUtil.createNodeKeyElement(BUSINESS_SYSTEM_FULLNAME_ID, "Бизнес-система. Полное наименование", document));
     	result.add(GraphmlUtil.createNodeKeyElement(INTEGRATION_SCENARIO_ID, "�?нтеграционный сценарий", document));
     	
-    	Element graphicsElem = GraphmlUtil.createKeyElementForNode(GRAPHICS_ELEM_ID, document);
-    	graphicsElem.setAttribute("yfiles.type", "nodegraphics");
-    	result.add(graphicsElem);
+    	Element nodeGraphicsElem = GraphmlUtil.createKeyElementForNode(NODE_GRAPHICS_ELEM_ID, document);
+    	nodeGraphicsElem.setAttribute(YFILES_TYPE, NODE_GRAPHICS);
+    	Element edgeGraphicsElem = GraphmlUtil.createKeyElementForEdge(EDGE_GRAPHICS_ELEM_ID, document);
+    	edgeGraphicsElem.setAttribute(YFILES_TYPE, EDGE_GRAPHICS);
+    	result.add(nodeGraphicsElem);
+    	result.add(edgeGraphicsElem);
     	
     	result.add(GraphmlUtil.createNodeKeyElement(BUSINESS_SOLUTIONS_ID, "Бизнес-решения", document));
     	result.add(GraphmlUtil.createNodeKeyElement(INTERNAL_ID, "�?дентификатор узла", document));
@@ -409,7 +413,10 @@ public class GraphMLGenerator {
     	edgeElement.appendChild(GraphmlUtil.createDataValueElement(EDGE_OBJECTVERSION_ID, graphEdge.getDataValue(EDGE_OBJECTVERSION_ID), docInstance));
     	edgeElement.appendChild(GraphmlUtil.createDataValueElement(EDGE_RECIEVER, graphEdge.getDataValue(EDGE_RECIEVER), docInstance));
     	edgeElement.appendChild(GraphmlUtil.createDataValueElement(EDGE_SENDER, graphEdge.getDataValue(EDGE_SENDER), docInstance));
-        
+    	Element dataEdgeGraphics = GraphmlUtil.createDataElement(EDGE_GRAPHICS_ELEM_ID, docInstance);
+    	dataEdgeGraphics.appendChild(createEdgeGraphicsElement(edge, docInstance));
+    	edgeElement.appendChild(dataEdgeGraphics);
+    	
         return edgeElement;
     }
     
@@ -427,21 +434,16 @@ public class GraphMLGenerator {
             Element pathElem = GraphmlUtil.createPointElement(edgePoint.toPoint2D(), docInstance);
             pathElement.appendChild(pathElem);
         }
-       // TODO: 
-        /*
-         * <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-4.5">
-            <y:Point x="578.0739026853147" y="309.57426422713223"/>
-            <y:Point x="578.0739026853147" y="291.4727017271316"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
         
-         */
-       polyLineEdge.appendChild(pathElement);
+        polyLineEdge.appendChild(pathElement);
+        Color lineColor = (Color)edge.getPath().getStroke();
+        Element lineStyleElement = GraphmlUtil.createLineStyleElement(lineColor, "line", 1.0, docInstance);
+        polyLineEdge.appendChild(lineStyleElement);
+        Element arrowElement = GraphmlUtil.createArrowElement("none", "standard", docInstance);
+        polyLineEdge.appendChild(arrowElement);
+        Element bendElement = GraphmlUtil.createBendStyleElement(edge.getPath().isSmooth(), docInstance);
+        polyLineEdge.appendChild(bendElement);
         
-       return polyLineEdge;
+        return polyLineEdge;
     }
 }
