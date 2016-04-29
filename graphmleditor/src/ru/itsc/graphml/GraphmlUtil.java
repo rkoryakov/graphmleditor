@@ -19,7 +19,7 @@ public class GraphmlUtil {
         xmlns4.setValue("http://www.yworks.com/xml/graphml");
         Attr xmlns5 = document.createAttribute("xmlns:yed");
         xmlns5.setValue("http://www.yworks.com/xml/yed/3");
-        graphmlElement.getAttributes().setNamedItem(xmlns1);//setAttributeNodeNS(xmlns1);
+        graphmlElement.getAttributes().setNamedItem(xmlns1);
         graphmlElement.getAttributes().setNamedItem(xmlns4);
         graphmlElement.setAttributeNode(xmlns5);
 

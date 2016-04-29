@@ -291,7 +291,7 @@ public class GraphMLGenerator {
     	
     	result.add(GraphmlUtil.createNodeKeyElement(BUSINESS_SYSTEM_NAME_ID, "Бизнес-система", document));
     	result.add(GraphmlUtil.createNodeKeyElement(BUSINESS_SYSTEM_FULLNAME_ID, "Бизнес-система. Полное наименование", document));
-    	result.add(GraphmlUtil.createNodeKeyElement(INTEGRATION_SCENARIO_ID, "�?нтеграционный сценарий", document));
+    	result.add(GraphmlUtil.createNodeKeyElement(INTEGRATION_SCENARIO_ID, "Интеграционный сценарий", document));
     	
     	Element nodeGraphicsElem = GraphmlUtil.createKeyElementForNode(NODE_GRAPHICS_ELEM_ID, document);
     	nodeGraphicsElem.setAttribute(YFILES_TYPE, NODE_GRAPHICS);
@@ -301,14 +301,14 @@ public class GraphMLGenerator {
     	result.add(edgeGraphicsElem);
     	
     	result.add(GraphmlUtil.createNodeKeyElement(BUSINESS_SOLUTIONS_ID, "Бизнес-решения", document));
-    	result.add(GraphmlUtil.createNodeKeyElement(INTERNAL_ID, "�?дентификатор узла", document));
+    	result.add(GraphmlUtil.createNodeKeyElement(INTERNAL_ID, "Идентификатор узла", document));
     	result.add(GraphmlUtil.createNodeKeyElement(PLATFORM_NAME_ID, "Платформа разработки", document));
     	result.add(GraphmlUtil.createNodeKeyElement(PLATFORM_CODE_ID, "Код платформы разработки", document));
     	result.add(GraphmlUtil.createNodeKeyElement(TECHNICAL_SYSTEM_ID, "Технические системы", document));
     	result.add(GraphmlUtil.createNodeKeyElement(MODULE_NAMES_ID, "Системные модули", document));
     	result.add(GraphmlUtil.createEdgeKeyElement(EDGE_NAME, "Наименование системы", document));
     	result.add(GraphmlUtil.createEdgeKeyElement(EDGE_NAMESPACE, "Пространство имен", document));
-    	result.add(GraphmlUtil.createEdgeKeyElement(EDGE_CHANGEDBY, "�?зменен", document));
+    	result.add(GraphmlUtil.createEdgeKeyElement(EDGE_CHANGEDBY, "Изменен", document));
     	result.add(GraphmlUtil.createEdgeKeyElement(EDGE_CHANGEDON, "Дата изменения", document));
     	result.add(GraphmlUtil.createEdgeKeyElement(EDGE_OBJECTID, "ObjectID", document));
     	result.add(GraphmlUtil.createEdgeKeyElement(EDGE_OBJECTVERSION_ID, "ObjectVersionID", document));
@@ -388,6 +388,7 @@ public class GraphMLGenerator {
         Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+        transformer.setOutputProperty(OutputKeys.ENCODING, "utf8");
         DOMSource source = new DOMSource(document);
         StringWriter stringWriter = new StringWriter();
         transformer.transform(source, new StreamResult(stringWriter));
