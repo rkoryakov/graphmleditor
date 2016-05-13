@@ -57,8 +57,11 @@ public class GraphMLPane extends Pane implements Initializable {
     }
     
     @Override 
-    public void initialize(URL location, ResourceBundle resources) {      
-        this.getChildren().add(rootModelGroup);
+    public void initialize(URL location, ResourceBundle resources) {  
+    	Pane pane = new Pane();
+    	pane.getChildren().add(rootModelGroup);
+        this.getChildren().add(pane);
+        pane.setStyle("-fx-background-color: gray;");
         
         this.setOnScroll((ScrollEvent event) -> {
             event.consume();
@@ -69,20 +72,26 @@ public class GraphMLPane extends Pane implements Initializable {
             
             double contentWidth = rootModelGroup.getBoundsInLocal().getWidth();
             double viewWidth = this.getBoundsInLocal().getWidth();
-            double d  = (rootModelGroup.getTranslateX() - event.getSceneX());
-            
-            double scaleFactor = (event.getDeltaY() > 0) ? SCALE_DELTA
-                    : 1 / SCALE_DELTA;
-            
+            double d  = (this.getTranslateX() - event.getSceneX());
+            double oldX = event.getX();
+            double scaleFactor = (event.getDeltaY() > 0) ? SCALE_DELTA : 1 / SCALE_DELTA;
+            double scaleFactor2 = 0.05;
+            System.out.println("event.getX()" + event.getX());
             // amount of scrolling in each direction in scrollContent coordinate
             // units
             //Point2D scrollOffset = figureScrollOffset(scrollContent, scroller);
             
-            rootModelGroup.setScaleX(rootModelGroup.getScaleX() * scaleFactor);
-            rootModelGroup.setScaleY(rootModelGroup.getScaleY() * scaleFactor);
+            //rootModelGroup.setScaleX(rootModelGroup.getScaleX() * scaleFactor);
+            //rootModelGroup.setScaleY(rootModelGroup.getScaleY() * scaleFactor);
+            pane.setScaleX(pane.getScaleX()*scaleFactor);
+            pane.setScaleY(pane.getScaleY()*scaleFactor);
+           
+            pane.setTranslateX(-(event.getX()*pane.getScaleX()-event.getX()));
+            pane.setTranslateY(-(event.getY()*pane.getScaleY()-event.getY()));
             //rootModelGroup.setTranslateX(rootModelGroup.getTranslateX() - (d*scaleFactor - d)/2);
             // move viewport so that old center remains in the center after the
             // scaling
+            System.out.println("getTranslateX = " + pane.getTranslateX() + " event.getX = " + event.getX() + " event.getSceneX = " + event.getSceneX() + " event.getScreenX = " + event.getScreenX() + " pane.getWidth = " + pane.getBoundsInLocal().getWidth() + " pane scale width = " + pane.getBoundsInLocal().getWidth()*pane.getScaleX());
         });
     }
 

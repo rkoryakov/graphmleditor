@@ -35,7 +35,7 @@ import ru.itsc.graphmleditor.pane.GraphMLPane;
  * Parent node. The node that may contains children
  */
 public class PNode extends AbstractNode {
-    public static final int DEFAULT_HEADER_OFFSET = 33;
+    public static final int DEFAULT_HEADER_OFFSET = 27;
     
     private PNode pNode; // parent node
     private Pane contentPane; // content area for children

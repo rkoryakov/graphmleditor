@@ -123,7 +123,12 @@ public class Edge extends Parent {
         Point2D sourceVector = firstPoint.subtract(secondPoint);
         double targetAngel = targetVector.angle(0, -1);
         double sourceAngel = sourceVector.angle(0, -1);
-
+        arrow = createArrow();
+        Bounds boundsArrow = arrow.getBoundsInLocal();
+        double offsetForArrow = boundsArrow.getHeight();
+        double targetMagnitude = targetVector.magnitude();
+        
+        
         // we want to draw line-arrow from the source node to the target node
         // thus, we need to define a border edge of the source/target node from/to which 
         // the line-arrow must be drawn
@@ -141,6 +146,7 @@ public class Edge extends Parent {
 
         if (targetAngel >= 0.0 && targetAngel < 45.0) {
             ty = ty + tdy + identTy;
+            
         } else if (targetAngel >= 45.0 && targetAngel < 135.0) {
             if (targetVector.getX() < 0) {
                 tx = tx + tdx + identTx;
@@ -151,20 +157,18 @@ public class Edge extends Parent {
             ty = ty - tdy - identTy;
         }
         
-        startPoint = new Point2D(sx, sy);
-        endPoint = new Point2D(tx, ty);
-        path = buildPath();
-        arrow = createArrow();
-        Bounds boundsArrow = arrow.getBoundsInLocal();
-        // top-left or bottom-left sectors
-        arrow.setRotate(targetVector.getX() < 0 ? -targetAngel : targetAngel);
-        
-        double cosT = targetVector.getX() / targetVector.magnitude();
-        double sinT = targetVector.getY() / targetVector.magnitude();
+        double cosT = targetVector.getX() / targetMagnitude;
+        double sinT = targetVector.getY() / targetMagnitude;
         Point2D deltaPointArrow = new Point2D(cosT*DEFAULT_ARROW_WIDTH/2, sinT*DEFAULT_ARROW_HEIGHT/2);
         
-        arrow.setTranslateX(tx - boundsArrow.getWidth()/2 - deltaPointArrow.getX());
-        arrow.setTranslateY(ty - boundsArrow.getHeight()/2 - deltaPointArrow.getY());
+        startPoint = new Point2D(sx, sy);
+        endPoint = new Point2D(tx - deltaPointArrow.getX(), ty - deltaPointArrow.getY());
+        path = buildPath();
+        
+        // top-left or bottom-left sectors
+        arrow.setRotate(targetVector.getX() < 0 ? -targetAngel : targetAngel);
+        arrow.setTranslateX(endPoint.getX() - boundsArrow.getWidth()/2/* - deltaPointArrow.getX()*/);
+        arrow.setTranslateY(endPoint.getY() - boundsArrow.getHeight()/2/* - deltaPointArrow.getY()*/);
 
         this.getChildren().addAll(path, arrow);
         path.toBack();

@@ -83,7 +83,6 @@ public class ScalingPanel extends Application {
         // move viewport so that old center remains in the center after the
         // scaling
         repositionScroller(scrollContent, scroller, scaleFactor, scrollOffset);
-
       }
     });
 

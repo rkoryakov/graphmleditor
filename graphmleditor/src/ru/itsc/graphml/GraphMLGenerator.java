@@ -251,8 +251,6 @@ public class GraphMLGenerator {
         nodeElem.appendChild(bsDataElem);
         Element bsFullName = GraphmlUtil.createDataValueElement(BUSINESS_SYSTEM_FULLNAME_ID, graphNode.getDataValue(BUSINESS_SYSTEM_FULLNAME_ID), document);
         nodeElem.appendChild(bsFullName);
-        StringBuilder solutions = new StringBuilder();
-
         Element bSolutions = GraphmlUtil.createDataElement(BUSINESS_SOLUTIONS_ID, document);
         bSolutions.setTextContent(graphNode.getDataValue(BUSINESS_SOLUTIONS_ID));
         nodeElem.appendChild(bSolutions);
@@ -260,15 +258,13 @@ public class GraphMLGenerator {
         nodeElem.appendChild(platformName);
         Element platformCode = GraphmlUtil.createDataValueElement(PLATFORM_CODE_ID, graphNode.getDataValue(PLATFORM_CODE_ID), document);
         nodeElem.appendChild(platformCode);
-        
         Element technicalSystem = GraphmlUtil.createDataElement(TECHNICAL_SYSTEM_ID, document);
         technicalSystem.setTextContent(graphNode.getDataValue(TECHNICAL_SYSTEM_ID));
-        
         nodeElem.appendChild(technicalSystem);
         Element systemModules = GraphmlUtil.createDataElement(MODULE_NAMES_ID, document);
         systemModules.setTextContent(graphNode.getDataValue(MODULE_NAMES_ID));
-        
         nodeElem.appendChild(systemModules);
+        
         Element graphicsElement = GraphmlUtil.createDataElement(NODE_GRAPHICS_ELEM_ID, document);
         Element shapeNode = creteShapeNodeElement(node, document);
         graphicsElement.appendChild(shapeNode);
