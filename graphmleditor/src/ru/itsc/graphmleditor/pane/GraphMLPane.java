@@ -86,8 +86,15 @@ public class GraphMLPane extends Pane implements Initializable {
             pane.setScaleX(pane.getScaleX()*scaleFactor);
             pane.setScaleY(pane.getScaleY()*scaleFactor);
            
-            pane.setTranslateX(-(event.getX()*pane.getScaleX()-event.getX()));
-            pane.setTranslateY(-(event.getY()*pane.getScaleY()-event.getY()));
+            double paneWidth = pane.getBoundsInLocal().getWidth()*pane.getScaleX();
+            double shiftX = (event.getX() - pane.getTranslateX())*0.1;
+            double shiftY = (event.getY() - pane.getTranslateY())*0.1;
+            if (event.getDeltaY() < 0) {
+            	shiftX = -shiftX;
+            	shiftY = -shiftY;
+            }
+            pane.setTranslateX( pane.getTranslateX() - shiftX/*-(event.getX()*pane.getScaleX()-event.getX())*/);
+            pane.setTranslateY( pane.getTranslateY() - shiftY/*-(event.getY()*pane.getScaleY()-event.getY())*/);
             //rootModelGroup.setTranslateX(rootModelGroup.getTranslateX() - (d*scaleFactor - d)/2);
             // move viewport so that old center remains in the center after the
             // scaling
