@@ -54,8 +54,11 @@ public class CNode extends AbstractNode {
         this.pNode = pNode;
         this.setId(graphNode.getId());
         graphNode.setNode(this);
-        setTranslateX(Math.abs(graphNode.getShapeNode().getGeomtery().getX() - pNode.getBoundsInParent().getMinX()));
-        setTranslateY(Math.abs(graphNode.getShapeNode().getGeomtery().getY() - pNode.getBoundsInParent().getMinY()));
+        // convert absolute vertexes to relatives
+        setTranslateX(Math.abs(graphNode.getShapeNode().getGeomtery().getX() - pNode.getTranslateX()));
+        setTranslateY(Math.abs(graphNode.getShapeNode().getGeomtery().getY() - pNode.getTranslateY()) - PNode.DEFAULT_HEADER_OFFSET);
+        
+        System.out.println("CNode X= " + getTranslateX() + " Y = " + getTranslateY());
     }
 
     /**

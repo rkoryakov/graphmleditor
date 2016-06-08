@@ -87,6 +87,7 @@ public class PNode extends AbstractNode {
 
         setTranslateX(metaGroupNode.getGeomtery().getX());
         setTranslateY(metaGroupNode.getGeomtery().getY());
+        System.out.println("PNode X = " + getTranslateX() + " Y = " + getTranslateY());
         
         header = new AnchorPane();
         VBox vBox = new VBox();

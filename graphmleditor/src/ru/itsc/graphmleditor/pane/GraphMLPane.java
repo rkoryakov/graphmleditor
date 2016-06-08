@@ -44,6 +44,7 @@ public class GraphMLPane extends Pane implements Initializable {
     private Group rootModelGroup = new Group();
     private final StackPane scalingPane = new StackPane();
     private final ScrollPane scrollPane = new ScrollPane();
+    private final Pane pane = new Pane();
     
     public GraphMLPane() {
         try {
@@ -58,47 +59,34 @@ public class GraphMLPane extends Pane implements Initializable {
     
     @Override 
     public void initialize(URL location, ResourceBundle resources) {  
-    	Pane pane = new Pane();
+    	
     	pane.getChildren().add(rootModelGroup);
         this.getChildren().add(pane);
-        pane.setStyle("-fx-background-color: gray;");
-        
+
         this.setOnScroll((ScrollEvent event) -> {
-            event.consume();
             
-            if (event.getDeltaY() == 0) {
-                return;
+        	event.consume();
+            
+        	double scaleFactor = 0;
+            double scaleDelta = 0.1;
+            if (event.getDeltaY() < 0) {
+            	scaleFactor = 1 / SCALE_DELTA;
+            	scaleDelta = -scaleDelta;
+            } else {
+            	scaleFactor = SCALE_DELTA;
             }
-            
-            double contentWidth = rootModelGroup.getBoundsInLocal().getWidth();
-            double viewWidth = this.getBoundsInLocal().getWidth();
-            double d  = (this.getTranslateX() - event.getSceneX());
-            double oldX = event.getX();
-            double scaleFactor = (event.getDeltaY() > 0) ? SCALE_DELTA : 1 / SCALE_DELTA;
-            double scaleFactor2 = 0.05;
-            System.out.println("event.getX()" + event.getX());
-            // amount of scrolling in each direction in scrollContent coordinate
-            // units
-            //Point2D scrollOffset = figureScrollOffset(scrollContent, scroller);
-            
-            //rootModelGroup.setScaleX(rootModelGroup.getScaleX() * scaleFactor);
-            //rootModelGroup.setScaleY(rootModelGroup.getScaleY() * scaleFactor);
+
             pane.setScaleX(pane.getScaleX()*scaleFactor);
             pane.setScaleY(pane.getScaleY()*scaleFactor);
            
             double paneWidth = pane.getBoundsInLocal().getWidth()*pane.getScaleX();
-            double shiftX = (event.getX() - pane.getTranslateX())*0.1;
-            double shiftY = (event.getY() - pane.getTranslateY())*0.1;
-            if (event.getDeltaY() < 0) {
-            	shiftX = -shiftX;
-            	shiftY = -shiftY;
-            }
-            pane.setTranslateX( pane.getTranslateX() - shiftX/*-(event.getX()*pane.getScaleX()-event.getX())*/);
-            pane.setTranslateY( pane.getTranslateY() - shiftY/*-(event.getY()*pane.getScaleY()-event.getY())*/);
-            //rootModelGroup.setTranslateX(rootModelGroup.getTranslateX() - (d*scaleFactor - d)/2);
-            // move viewport so that old center remains in the center after the
-            // scaling
-            System.out.println("getTranslateX = " + pane.getTranslateX() + " event.getX = " + event.getX() + " event.getSceneX = " + event.getSceneX() + " event.getScreenX = " + event.getScreenX() + " pane.getWidth = " + pane.getBoundsInLocal().getWidth() + " pane scale width = " + pane.getBoundsInLocal().getWidth()*pane.getScaleX());
+            double shiftX = (event.getX() - pane.getTranslateX())*scaleDelta;
+            double shiftY = (event.getY() - pane.getTranslateY())*scaleDelta;
+
+            pane.setTranslateX( pane.getTranslateX() - shiftX);
+            pane.setTranslateY( pane.getTranslateY() - shiftY);
+
+            //System.out.println("getTranslateX = " + pane.getTranslateX() + " event.getX = " + event.getX() + " event.getSceneX = " + event.getSceneX() + " event.getScreenX = " + event.getScreenX() + " pane.getWidth = " + pane.getBoundsInLocal().getWidth() + " pane scale width = " + pane.getBoundsInLocal().getWidth()*pane.getScaleX());
         });
     }
 
@@ -119,11 +107,13 @@ public class GraphMLPane extends Pane implements Initializable {
     }
     
     private void toCenterContent() {
+    	this.pane.setTranslateX(0.0);
+    	this.pane.setTranslateY(0.0);
         double contentW = rootModelGroup.getBoundsInLocal().getWidth();
         double contentH = rootModelGroup.getBoundsInLocal().getHeight();
         
-        double cx = this.getBoundsInLocal().getWidth() / 2;
-        double cy = this.getBoundsInLocal().getHeight() / 2;
+        double cx = this.getBoundsInParent().getWidth() / 2;
+        double cy = this.getBoundsInParent().getHeight() / 2;
         rootModelGroup.setTranslateX(cx - contentW / 2);
         rootModelGroup.setTranslateY(cy - contentH / 2);
     }
@@ -139,13 +129,16 @@ public class GraphMLPane extends Pane implements Initializable {
     }
     
     public void refreshScale() {
-        rootModelGroup.setScaleX(1.0);
-        rootModelGroup.setScaleY(1.0);
+        pane.setScaleX(1.0);
+        pane.setScaleY(1.0);
     }
     
     public void initContent() {
         refreshScale();
         rootModelGroup.getChildren().clear();
-        
+        this.pane.getChildren().clear();
+        rootModelGroup = new Group();
+        this.pane.getChildren().add(rootModelGroup);
+        //rootModelGroup.
     }
 }

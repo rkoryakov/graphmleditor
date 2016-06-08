@@ -329,6 +329,7 @@ public class GraphMLGenerator {
         String nodeHeight = Double.toString(node.getNode().getHeight());
         String nodeX = Double.toString(node.getSceneX());
         String nodeY = Double.toString(node.getSceneY());
+        //System.out.println("Saved CNode nodeX = " + nodeX + " nodeY = " + nodeY);
     	Element geometry = GraphmlUtil.createGeometryElement( 
                 nodeWidth, 
                 nodeHeight, 
