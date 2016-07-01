@@ -1,5 +1,5 @@
 
-package ru.itsc.backend.planedmap;
+package ru.itsc.backend.plannedmap;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getLastPlanedMetamap")
-public class GetLastPlanedMetamap {
+@XmlType(namespace = "ru.itsc.backend.plannedmap", name = "getLastPlanedMetamap")
+public class GetLastPlannedMetamap {
 
 
 }

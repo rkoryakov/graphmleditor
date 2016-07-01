@@ -1,5 +1,5 @@
 
-package ru.itsc.backend.planedmap;
+package ru.itsc.backend.plannedmap;
 
 import java.util.List;
 import javax.jws.WebMethod;
@@ -17,11 +17,11 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "PlanedMetamapService", targetNamespace = "http://gazprom_neft.ru/metamap/bean/")
+@WebService(name = "PlannedMetamapService", targetNamespace = "http://gazprom_neft.ru/metamap/bean/")
 @XmlSeeAlso({
     ObjectFactory.class
 })
-public interface PlanedMetamapService {
+public interface PlannedMetamapService {
 
 
     /**
@@ -33,7 +33,7 @@ public interface PlanedMetamapService {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getLastPlanedMetamap", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", className = "ru.gazprom_neft.metamap.bean.GetLastPlanedMetamap")
     @ResponseWrapper(localName = "getLastPlanedMetamapResponse", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", className = "ru.gazprom_neft.metamap.bean.GetLastPlanedMetamapResponse")
-    public PlanedMetamap getLastPlanedMetamap();
+    public PlannedMetamap getLastPlanedMetamap();
 
     /**
      * 
@@ -46,7 +46,7 @@ public interface PlanedMetamapService {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getPlanedMetamaps", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", className = "ru.gazprom_neft.metamap.bean.GetPlanedMetamaps")
     @ResponseWrapper(localName = "getPlanedMetamapsResponse", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", className = "ru.gazprom_neft.metamap.bean.GetPlanedMetamapsResponse")
-    public List<PlanedMetamap> getPlanedMetamaps(
+    public List<PlannedMetamap> getPlanedMetamaps(
         @WebParam(name = "startDate", targetNamespace = "")
         Date startDate,
         @WebParam(name = "endDate", targetNamespace = "")
@@ -63,7 +63,7 @@ public interface PlanedMetamapService {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getPlanedMetamapsByLimit", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", className = "ru.gazprom_neft.metamap.bean.GetPlanedMetamapsByLimit")
     @ResponseWrapper(localName = "getPlanedMetamapsByLimitResponse", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", className = "ru.gazprom_neft.metamap.bean.GetPlanedMetamapsByLimitResponse")
-    public List<PlanedMetamap> getPlanedMetamapsByLimit(
+    public List<PlannedMetamap> getPlanedMetamapsByLimit(
         @WebParam(name = "id", targetNamespace = "")
         long id,
         @WebParam(name = "rows", targetNamespace = "")
@@ -79,7 +79,7 @@ public interface PlanedMetamapService {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getPlanedMetamap", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", className = "ru.gazprom_neft.metamap.bean.GetPlanedMetamap")
     @ResponseWrapper(localName = "getPlanedMetamapResponse", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", className = "ru.gazprom_neft.metamap.bean.GetPlanedMetamapResponse")
-    public PlanedMetamap getPlanedMetamap(
+    public PlannedMetamap getPlanedMetamap(
         @WebParam(name = "id", targetNamespace = "")
         long id);
 

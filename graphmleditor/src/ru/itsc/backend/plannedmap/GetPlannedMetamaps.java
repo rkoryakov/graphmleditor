@@ -1,5 +1,5 @@
 
-package ru.itsc.backend.planedmap;
+package ru.itsc.backend.plannedmap;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getPlanedMetamaps", propOrder = {
+@XmlType(namespace = "ru.itsc.backend.plannedmap", name = "getPlanedMetamaps", propOrder = {
     "startDate",
     "endDate"
 })
-public class GetPlanedMetamaps {
+public class GetPlannedMetamaps {
 
     protected Date startDate;
     protected Date endDate;
