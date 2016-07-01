@@ -13,6 +13,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -29,8 +34,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
 import ru.itsc.commons.message.MessageBox;
 import ru.itsc.graphml.Graph;
 import ru.itsc.graphml.GraphMLParser;
@@ -82,51 +85,55 @@ public class GraphMLEditorController implements Initializable {
         }
     }
     
-    @FXML
-    private void handleActionSave(ActionEvent event) {
-        fileChooser.setTitle("Save");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("GraphML file", "*.graphml"));
-        
-        File file = fileChooser.showSaveDialog(stage);
-        if (file != null) {
-            try {
-                SaveGraphmlFileService graphmlService = new SaveGraphmlFileService(file, graphMLPane.getRootGroup());
-            statusLabel.textProperty().bind(graphmlService.messageProperty());
-            taskDimmer.visibleProperty().bind(graphmlService.runningProperty());
-            progress.visibleProperty().bind(graphmlService.runningProperty());
-            
-            graphmlService.setOnSucceeded((WorkerStateEvent wse) -> {
-                    try {
-                        GraphMLParser parser = new GraphMLParser();
-                        graphMLPane.showGraphML(parser.parse(wse.getSource().getValue().toString()));
-                        statusLabel.textProperty().unbind();
-                        statusLabel.setText("");
-                    } catch (ParserConfigurationException | SAXException | IOException ex) {
-                        logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-                    }
-            });
-            graphmlService.setOnFailed((WorkerStateEvent wse) -> {
-                MessageBox.show(stage, wse.getSource().getException().getLocalizedMessage(), "Error", MessageBox.ICON_ERROR | MessageBox.OK);
-                logger.log(Level.SEVERE, wse.getSource().getException().getLocalizedMessage(), wse.getSource().getException());
-                statusLabel.textProperty().unbind();
-                statusLabel.setText(wse.getSource().getException().getLocalizedMessage());
-            });
-            graphmlService.start();
-            } catch(Exception e) {
-               logger.log(Level.SEVERE, e.getMessage(), e);
-            }
-        }
-    }
+	@FXML
+	private void handleActionSave(ActionEvent event) {
+		fileChooser.setTitle("Save");
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("GraphML file", "*.graphml"));
+
+		File file = fileChooser.showSaveDialog(stage);
+		if (file != null) {
+			try {
+				SaveGraphmlFileService graphmlService = new SaveGraphmlFileService(file, graphMLPane.getRootGroup());
+				statusLabel.textProperty().bind(graphmlService.messageProperty());
+				taskDimmer.visibleProperty().bind(graphmlService.runningProperty());
+				progress.visibleProperty().bind(graphmlService.runningProperty());
+
+				graphmlService.setOnSucceeded((WorkerStateEvent wse) -> {
+					try {
+						GraphMLParser parser = new GraphMLParser();
+						graphMLPane.showGraphML(parser.parse(wse.getSource().getValue().toString()));
+						statusLabel.textProperty().unbind();
+						statusLabel.setText("");
+					} catch (ParserConfigurationException | SAXException | IOException ex) {
+						logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+					}
+				});
+				graphmlService.setOnFailed((WorkerStateEvent wse) -> {
+					MessageBox.show(stage, wse.getSource().getException().getLocalizedMessage(), "Error",
+							MessageBox.ICON_ERROR | MessageBox.OK);
+					logger.log(Level.SEVERE, wse.getSource().getException().getLocalizedMessage(),
+							wse.getSource().getException());
+					statusLabel.textProperty().unbind();
+					statusLabel.setText(wse.getSource().getException().getLocalizedMessage());
+				});
+				graphmlService.start();
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+	}
     
     @FXML
     private void handleActionLoad(ActionEvent event) {
         
         try {
-            String id = PropertiesManager.getPropertyValue(PropertiesManager.METAMAP_ID);
-            String name = PropertiesManager.getPropertyValue(PropertiesManager.METAMAP_NAME);
-            String host = PropertiesManager.getPropertyValue(PropertiesManager.SERVER_HOST);
+     
+            LoadGraphmlService graphmlService = new LoadGraphmlService();
+            graphmlService.setId(PropertiesManager.getPropertyValue(PropertiesManager.METAMAP_ID));
+            graphmlService.setName(PropertiesManager.getPropertyValue(PropertiesManager.METAMAP_NAME));
+            graphmlService.setHost(PropertiesManager.getPropertyValue(PropertiesManager.SERVER_HOST));
             
-            LoadGraphmlService graphmlService = new LoadGraphmlService(id, name, host);
+            //LoadPlannedGraphmlService graphmlService = new LoadPlannedGraphmlService(PlanedMetamapOperation.LAST, host);
             statusLabel.textProperty().bind(graphmlService.messageProperty());
             taskDimmer.visibleProperty().bind(graphmlService.runningProperty());
             progress.visibleProperty().bind(graphmlService.runningProperty());

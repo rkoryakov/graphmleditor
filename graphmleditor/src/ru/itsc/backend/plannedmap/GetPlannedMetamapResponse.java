@@ -1,5 +1,5 @@
 
-package ru.itsc.backend.planedmap;
+package ru.itsc.backend.plannedmap;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getLastPlanedMetamapResponse complex type.
+ * <p>Java class for getPlanedMetamapResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getLastPlanedMetamapResponse">
+ * &lt;complexType name="getPlanedMetamapResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -27,23 +27,23 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getLastPlanedMetamapResponse", propOrder = {
+@XmlType(namespace = "ru.itsc.backend.plannedmap", name = "getPlanedMetamapResponse", propOrder = {
     "_return"
 })
-public class GetLastPlanedMetamapResponse {
+public class GetPlannedMetamapResponse {
 
     @XmlElement(name = "return")
-    protected PlanedMetamap _return;
+    protected PlannedMetamap _return;
 
     /**
      * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link PlanedMetamap }
+     *     {@link PlannedMetamap }
      *     
      */
-    public PlanedMetamap getReturn() {
+    public PlannedMetamap getReturn() {
         return _return;
     }
 
@@ -52,10 +52,10 @@ public class GetLastPlanedMetamapResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link PlanedMetamap }
+     *     {@link PlannedMetamap }
      *     
      */
-    public void setReturn(PlanedMetamap value) {
+    public void setReturn(PlannedMetamap value) {
         this._return = value;
     }
 

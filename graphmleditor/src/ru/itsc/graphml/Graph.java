@@ -28,7 +28,7 @@ public class Graph {
     }
     
     public void addNode(GraphNode node) {
-        // put the node to global map for convinient using later
+        // put the node to global map for convenient using later
         nodeMapGlobal.put(node.getId(), node);
         // put the node to map of linked nodes
         nodeMap.put(node.getId(), node);

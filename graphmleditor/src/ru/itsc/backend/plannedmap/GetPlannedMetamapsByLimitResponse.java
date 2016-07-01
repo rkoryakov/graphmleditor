@@ -1,5 +1,5 @@
 
-package ru.itsc.backend.planedmap;
+package ru.itsc.backend.plannedmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +10,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getPlanedMetamapsResponse complex type.
+ * <p>Java class for getPlanedMetamapsByLimitResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getPlanedMetamapsResponse">
+ * &lt;complexType name="getPlanedMetamapsByLimitResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getPlanedMetamapsResponse", propOrder = {
+@XmlType(namespace = "ru.itsc.backend.plannedmap", name = "getPlanedMetamapsByLimitResponse", propOrder = {
     "_return"
 })
-public class GetPlanedMetamapsResponse {
+public class GetPlannedMetamapsByLimitResponse {
 
     @XmlElement(name = "return")
-    protected List<PlanedMetamap> _return;
+    protected List<PlannedMetamap> _return;
 
     /**
      * Gets the value of the return property.
@@ -55,13 +55,13 @@ public class GetPlanedMetamapsResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link PlanedMetamap }
+     * {@link PlannedMetamap }
      * 
      * 
      */
-    public List<PlanedMetamap> getReturn() {
+    public List<PlannedMetamap> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<PlanedMetamap>();
+            _return = new ArrayList<PlannedMetamap>();
         }
         return this._return;
     }

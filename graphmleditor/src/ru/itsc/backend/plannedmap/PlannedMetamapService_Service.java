@@ -1,5 +1,5 @@
 
-package ru.itsc.backend.planedmap;
+package ru.itsc.backend.plannedmap;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,8 +17,8 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "PlanedMetamapService", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", wsdlLocation = "http://sapdp7.gazprom-neft.local:50000/PlanedMetamapService/PlanedMetamapBean?wsdl")
-public class PlanedMetamapService_Service extends Service {
+@WebServiceClient(name = "PlannedMetamapService", targetNamespace = "http://gazprom_neft.ru/metamap/bean/", wsdlLocation = "http://sapdp7.gazprom-neft.local:50000/PlanedMetamapService/PlanedMetamapBean?wsdl")
+public class PlannedMetamapService_Service extends Service {
 
     private final static URL PLANEDMETAMAPSERVICE_WSDL_LOCATION;
     private final static WebServiceException PLANEDMETAMAPSERVICE_EXCEPTION;
@@ -37,42 +37,42 @@ public class PlanedMetamapService_Service extends Service {
         PLANEDMETAMAPSERVICE_EXCEPTION = e;
     }
 
-    public PlanedMetamapService_Service(String hostUrl) throws MalformedURLException {
+    public PlannedMetamapService_Service(String hostUrl) throws MalformedURLException {
         super(new URL(hostUrl + URL_QUERY_PART), PLANEDMETAMAPSERVICE_QNAME);
     }
     
-    public PlanedMetamapService_Service() {
+    public PlannedMetamapService_Service() {
         super(__getWsdlLocation(), PLANEDMETAMAPSERVICE_QNAME);
     }
 
-    public PlanedMetamapService_Service(WebServiceFeature... features) {
+    public PlannedMetamapService_Service(WebServiceFeature... features) {
         super(__getWsdlLocation(), PLANEDMETAMAPSERVICE_QNAME, features);
     }
 
-    public PlanedMetamapService_Service(URL wsdlLocation) {
+    public PlannedMetamapService_Service(URL wsdlLocation) {
         super(wsdlLocation, PLANEDMETAMAPSERVICE_QNAME);
     }
 
-    public PlanedMetamapService_Service(URL wsdlLocation, WebServiceFeature... features) {
+    public PlannedMetamapService_Service(URL wsdlLocation, WebServiceFeature... features) {
         super(wsdlLocation, PLANEDMETAMAPSERVICE_QNAME, features);
     }
 
-    public PlanedMetamapService_Service(URL wsdlLocation, QName serviceName) {
+    public PlannedMetamapService_Service(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
 
-    public PlanedMetamapService_Service(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+    public PlannedMetamapService_Service(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
         super(wsdlLocation, serviceName, features);
     }
 
     /**
      * 
      * @return
-     *     returns PlanedMetamapService
+     *     returns PlannedMetamapService
      */
     @WebEndpoint(name = "PlanedMetamapPort")
-    public PlanedMetamapService getPlanedMetamapPort() {
-        return super.getPort(new QName("http://gazprom_neft.ru/metamap/bean/", "PlanedMetamapPort"), PlanedMetamapService.class);
+    public PlannedMetamapService getPlanedMetamapPort() {
+        return super.getPort(new QName("http://gazprom_neft.ru/metamap/bean/", "PlanedMetamapPort"), PlannedMetamapService.class);
     }
 
     /**
@@ -80,11 +80,11 @@ public class PlanedMetamapService_Service extends Service {
      * @param features
      *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return
-     *     returns PlanedMetamapService
+     *     returns PlannedMetamapService
      */
     @WebEndpoint(name = "PlanedMetamapPort")
-    public PlanedMetamapService getPlanedMetamapPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://gazprom_neft.ru/metamap/bean/", "PlanedMetamapPort"), PlanedMetamapService.class, features);
+    public PlannedMetamapService getPlanedMetamapPort(WebServiceFeature... features) {
+        return super.getPort(new QName("http://gazprom_neft.ru/metamap/bean/", "PlanedMetamapPort"), PlannedMetamapService.class, features);
     }
 
     private static URL __getWsdlLocation() {

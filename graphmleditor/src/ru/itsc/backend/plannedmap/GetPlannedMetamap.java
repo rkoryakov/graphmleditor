@@ -1,5 +1,5 @@
 
-package ru.itsc.backend.planedmap;
+package ru.itsc.backend.plannedmap;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -7,17 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getPlanedMetamapsByLimit complex type.
+ * <p>Java class for getPlanedMetamap complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getPlanedMetamapsByLimit">
+ * &lt;complexType name="getPlanedMetamap">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="rows" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,14 +26,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getPlanedMetamapsByLimit", propOrder = {
-    "id",
-    "rows"
+@XmlType(namespace = "ru.itsc.backend.plannedmap", name = "getPlanedMetamap", propOrder = {
+    "id"
 })
-public class GetPlanedMetamapsByLimit {
+public class GetPlannedMetamap {
 
     protected long id;
-    protected int rows;
 
     /**
      * Gets the value of the id property.
@@ -50,22 +47,6 @@ public class GetPlanedMetamapsByLimit {
      */
     public void setId(long value) {
         this.id = value;
-    }
-
-    /**
-     * Gets the value of the rows property.
-     * 
-     */
-    public int getRows() {
-        return rows;
-    }
-
-    /**
-     * Sets the value of the rows property.
-     * 
-     */
-    public void setRows(int value) {
-        this.rows = value;
     }
 
 }
