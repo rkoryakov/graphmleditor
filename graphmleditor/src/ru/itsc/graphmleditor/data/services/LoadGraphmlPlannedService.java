@@ -90,7 +90,7 @@ public class LoadGraphmlPlannedService extends Service<Graph> {
 		protected Graph call() throws Exception {
 			updateTitle(TITLE_TEXT1);
 			updateMessage(MESSAGE_TEXT1 + host);
-			PlannedMetamapService_Service service = new PlannedMetamapService_Service(host.toString());
+			PlannedMetamapService_Service service = new PlannedMetamapService_Service(host.get().toString());
 			PlannedMetamapService port = service.getPlanedMetamapPort();
 			PlannedMetamap map = port.getLastPlanedMetamap();
 			
@@ -101,7 +101,7 @@ public class LoadGraphmlPlannedService extends Service<Graph> {
             Graph graph = parser.parse(map.getMap());
            
             sleep(500, this);  
-            
+
 			return graph;
 		}
 	}
@@ -118,8 +118,8 @@ public class LoadGraphmlPlannedService extends Service<Graph> {
 				throw new IllegalArgumentException("id = " + id + ", rows = " + rows);
 			}
 			updateTitle(TITLE_TEXT1);
-			updateMessage(MESSAGE_TEXT1 + host);
-			PlannedMetamapService_Service service = new PlannedMetamapService_Service(host.toString());
+			updateMessage(MESSAGE_TEXT1 + getHost().getHost());
+			PlannedMetamapService_Service service = new PlannedMetamapService_Service(getHost().getHost());
 			PlannedMetamapService port = service.getPlanedMetamapPort();
 			List<PlannedMetamap> result = port.getPlanedMetamapsByLimit(getId(), getRows());
 			sleep(500, this); 

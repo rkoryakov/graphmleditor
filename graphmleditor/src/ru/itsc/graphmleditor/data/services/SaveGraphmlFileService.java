@@ -8,6 +8,7 @@ package ru.itsc.graphmleditor.data.services;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -73,7 +74,8 @@ public class SaveGraphmlFileService extends Service<String> {
             
             updateMessage(MESSAGE_TEXT2);
             
-            try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file))) {
+            try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), Charset.forName("utf-8"))) {
+            	osw.write(graph);
             	osw.close();
             }
             
