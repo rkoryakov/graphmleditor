@@ -9,6 +9,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -39,6 +40,8 @@ import ru.itsc.graphml.Graph;
 import ru.itsc.graphml.GraphMLParser;
 import ru.itsc.graphmleditor.config.PropertiesManager;
 import ru.itsc.graphmleditor.config.SettingsDialog;
+import ru.itsc.graphmleditor.data.services.LoadGraphmlPlannedService;
+import ru.itsc.graphmleditor.data.services.LoadGraphmlPlannedService.PlannedMetamapOperation;
 import ru.itsc.graphmleditor.data.services.LoadGraphmlService;
 import ru.itsc.graphmleditor.data.services.SaveGraphmlFileService;
 import ru.itsc.graphmleditor.pane.GraphMLPane;
@@ -128,12 +131,14 @@ public class GraphMLEditorController implements Initializable {
         
         try {
      
-            LoadGraphmlService graphmlService = new LoadGraphmlService();
-            graphmlService.setId(PropertiesManager.getPropertyValue(PropertiesManager.METAMAP_ID));
-            graphmlService.setName(PropertiesManager.getPropertyValue(PropertiesManager.METAMAP_NAME));
-            graphmlService.setHost(PropertiesManager.getPropertyValue(PropertiesManager.SERVER_HOST));
+//            LoadGraphmlService graphmlService = new LoadGraphmlService();
+//            graphmlService.setId(PropertiesManager.getPropertyValue(PropertiesManager.METAMAP_ID));
+//            graphmlService.setName(PropertiesManager.getPropertyValue(PropertiesManager.METAMAP_NAME));
+//            graphmlService.setHost(PropertiesManager.getPropertyValue(PropertiesManager.SERVER_HOST));
             
-            //LoadPlannedGraphmlService graphmlService = new LoadPlannedGraphmlService(PlanedMetamapOperation.LAST, host);
+            LoadGraphmlPlannedService graphmlService = new LoadGraphmlPlannedService();
+            graphmlService.setHost(new URI(PropertiesManager.getPropertyValue(PropertiesManager.SERVER_HOST)));
+            graphmlService.setOperation(PlannedMetamapOperation.LAST_MAP);
             statusLabel.textProperty().bind(graphmlService.messageProperty());
             taskDimmer.visibleProperty().bind(graphmlService.runningProperty());
             progress.visibleProperty().bind(graphmlService.runningProperty());
